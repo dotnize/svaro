@@ -1,3 +1,13 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import Editor from "$lib/components/Editor.svelte";
+
+	import Button from "./example/Button.svelte";
+	import Heading from "./example/Heading.svelte";
+
+	const components = [
+		{ id: "button", name: "Button", render: Button },
+		{ id: "heading", name: "Heading", render: Heading },
+	];
+</script>
+
+<Editor {components} />
