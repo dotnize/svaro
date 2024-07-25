@@ -1,6 +1,16 @@
 {
 	"name": "sveltor",
+	"description": "The visual editor for Svelte 5",
 	"version": "0.0.1",
+	"author": "Nathaniel Tampus",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dotnize/sveltor.git"
+	},
+	"bugs": {
+		"url": "https://github.com/dotnize/sveltor/issues"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
