@@ -19,9 +19,6 @@
 		"postcss.config.js": true
 	},
 
-	// always choose typescript from node_modules
-	"typescript.tsdk": "./node_modules/typescript/lib",
-
 	// use LF line endings
 	"files.eol": "\n",
 
