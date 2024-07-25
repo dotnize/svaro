@@ -1,0 +1,50 @@
+{
+	// hide misc files that we most likely don't need to see
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+
+		"**/.svelte-kit": true,
+		"**/node_modules": true,
+		"pnpm-lock.yaml": true,
+		".editorconfig": true,
+		"eslint.config.js": true,
+		".gitattributes": true,
+		".prettierrc": true,
+		".prettierignore": true,
+		"postcss.config.js": true
+	},
+
+	// always choose typescript from node_modules
+	"typescript.tsdk": "./node_modules/typescript/lib",
+
+	// use LF line endings
+	"files.eol": "\n",
+
+	// more readable tabs
+	"workbench.editor.customLabels.patterns": {
+		"**/routes/**/*.*": "${dirname}/${filename}.${extname}"
+	},
+
+	// smol performance improvements
+	"editor.minimap.renderCharacters": false,
+
+	// set prettier as default formatter for json, ts, js, html, css
+	"[json][jsonc][typescript][javascript][html][css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	// svelte support
+	"svelte.enable-ts-plugin": true,
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode"
+	},
+
+	// auto-format on save & paste
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true
+}
