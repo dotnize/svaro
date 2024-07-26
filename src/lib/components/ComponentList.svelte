@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ComponentData } from "$lib/types.js";
+	import type { ComponentData } from "$lib/types/config.js";
 	import {
 		dndzone,
 		SHADOW_ITEM_MARKER_PROPERTY_NAME,

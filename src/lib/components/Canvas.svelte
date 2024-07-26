@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ComponentData, RenderFunctions } from "$lib/types.js";
+	import type { ComponentData, RenderFunctions } from "$lib/types/config.js";
 	import { dndzone, type DndEvent } from "svelte-dnd-action";
 	import { flip } from "svelte/animate";
 	import type { HTMLAttributes } from "svelte/elements";

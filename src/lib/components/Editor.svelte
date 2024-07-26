@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ComponentConfig } from "$lib/types.js";
+	import type { ComponentConfig } from "$lib/types/config.js";
 	import Canvas from "./Canvas.svelte";
 	import ComponentList from "./ComponentList.svelte";
 
