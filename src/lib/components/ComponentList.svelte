@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Component } from "svelte";
+	import type { ComponentData } from "$lib/types.js";
 	import {
 		dndzone,
 		SHADOW_ITEM_MARKER_PROPERTY_NAME,
@@ -12,12 +12,11 @@
 	const flipDurationMs = 150;
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
-		components: { id: string; name: string; render: Component; props?: any }[];
+		components: ComponentData[];
 	}
 
 	let { components, ...restProps }: Props = $props();
 
-	// TODO: don't include the render function in dnd?
 	function handleComponentSourceConsider(e: CustomEvent<DndEvent>) {
 		const { trigger, id } = e.detail.info;
 		if (trigger === TRIGGERS.DRAG_STARTED) {
