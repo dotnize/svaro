@@ -1,0 +1,49 @@
+<script lang="ts">
+	import type { Component } from "svelte";
+	import {
+		dndzone,
+		SHADOW_ITEM_MARKER_PROPERTY_NAME,
+		TRIGGERS,
+		type DndEvent,
+	} from "svelte-dnd-action";
+	import { flip } from "svelte/animate";
+	import type { HTMLAttributes } from "svelte/elements";
+
+	const flipDurationMs = 150;
+
+	interface Props extends HTMLAttributes<HTMLDivElement> {
+		components: { id: string; name: string; render: Component; props?: any }[];
+	}
+
+	let { components, ...restProps }: Props = $props();
+
+	// TODO: don't include the render function in dnd?
+	function handleComponentSourceConsider(e: CustomEvent<DndEvent>) {
+		const { trigger, id } = e.detail.info;
+		if (trigger === TRIGGERS.DRAG_STARTED) {
+			const idx = components.findIndex((c) => c.id === id);
+			const newId = `${id.split("_copy_")[0]}_copy_${Math.round(Math.random() * 100000)}`;
+
+			e.detail.items = e.detail.items.filter((item) => !item[SHADOW_ITEM_MARKER_PROPERTY_NAME]);
+			e.detail.items.splice(idx, 0, { ...components[idx], id: newId });
+			components = e.detail.items as any;
+		}
+	}
+
+	function handleComponentSourceFinalize(e: CustomEvent<DndEvent>) {
+		components = e.detail.items as any;
+	}
+</script>
+
+<div
+	use:dndzone={{ items: components, flipDurationMs }}
+	onconsider={handleComponentSourceConsider}
+	onfinalize={handleComponentSourceFinalize}
+	{...restProps}
+>
+	{#each components as component (component.id)}
+		<div class="w-fit border-2 border-black p-1" animate:flip={{ duration: flipDurationMs }}>
+			{component.name}
+		</div>
+	{/each}
+</div>
