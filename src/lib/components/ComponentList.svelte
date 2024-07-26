@@ -17,7 +17,8 @@
 
 	let { components, ...restProps }: Props = $props();
 
-	function handleComponentSourceConsider(e: CustomEvent<DndEvent>) {
+	// TODO: properly type DndEvent<> for SHADOW_ITEM_MARKER_PROPERTY_NAME
+	function handleComponentSourceConsider(e: CustomEvent<DndEvent<any>>) {
 		const { trigger, id } = e.detail.info;
 		if (trigger === TRIGGERS.DRAG_STARTED) {
 			const idx = components.findIndex((c) => c.id === id);
@@ -25,12 +26,12 @@
 
 			e.detail.items = e.detail.items.filter((item) => !item[SHADOW_ITEM_MARKER_PROPERTY_NAME]);
 			e.detail.items.splice(idx, 0, { ...components[idx], id: newId });
-			components = e.detail.items as any;
+			components = e.detail.items;
 		}
 	}
 
-	function handleComponentSourceFinalize(e: CustomEvent<DndEvent>) {
-		components = e.detail.items as any;
+	function handleComponentSourceFinalize(e: CustomEvent<DndEvent<ComponentData>>) {
+		components = e.detail.items;
 	}
 </script>
 

@@ -14,12 +14,12 @@
 
 	let page = $state<ComponentData[]>([]);
 
-	function handlePageConsider(e: CustomEvent<DndEvent>) {
-		page = e.detail.items as any;
+	function handlePageConsider(e: CustomEvent<DndEvent<ComponentData>>) {
+		page = e.detail.items;
 	}
 
-	function handlePageFinalize(e: CustomEvent<DndEvent>) {
-		page = e.detail.items as any;
+	function handlePageFinalize(e: CustomEvent<DndEvent<ComponentData>>) {
+		page = e.detail.items;
 	}
 
 	$inspect(page);
