@@ -28,7 +28,9 @@
 >
 	{#each page as component (component.id)}
 		<div animate:flip={{ duration: flipDurationMs }}>
-			<svelte:component this={component.render} {...component.props} class="pointer-events-none" />
+			<div style="pointer-events: none;">
+				<svelte:component this={component.render} {...component.props} />
+			</div>
 		</div>
 	{/each}
 </div>
