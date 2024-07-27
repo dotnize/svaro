@@ -1,0 +1,58 @@
+export type FieldType = "text" | "textarea" | "number" | "boolean" | "radio" | "select" | "array";
+
+export interface BaseField {
+	type: FieldType;
+	label: string;
+	defaultValue?: unknown;
+}
+
+export interface TextField extends BaseField {
+	type: "text";
+	defaultValue?: string;
+}
+
+export interface TextareaField extends BaseField {
+	type: "textarea";
+	defaultValue?: string;
+}
+
+export interface NumberField extends BaseField {
+	type: "number";
+	min?: number;
+	max?: number;
+	step?: number;
+	defaultValue?: number;
+}
+
+export interface BooleanField extends BaseField {
+	type: "boolean";
+	defaultValue?: boolean;
+}
+
+export interface RadioField extends BaseField {
+	type: "radio";
+	options: string[];
+	defaultValue?: string;
+}
+
+export interface SelectField extends BaseField {
+	type: "select";
+	options: string[];
+	defaultValue?: string;
+}
+
+export interface ArrayField extends BaseField {
+	type: "array";
+	defaultValue?: string[];
+}
+
+export type Field =
+	| TextField
+	| TextareaField
+	| NumberField
+	| BooleanField
+	| RadioField
+	| SelectField
+	| ArrayField;
+
+export type Fields = Record<string, Field>;
