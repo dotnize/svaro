@@ -1,9 +1,5 @@
-export type FieldType = "text" | "textarea" | "number" | "boolean" | "radio" | "select" | "array";
-
-export interface BaseField {
-	type: FieldType;
+interface BaseField {
 	label: string;
-	defaultValue?: unknown;
 }
 
 export interface TextField extends BaseField {
@@ -37,6 +33,7 @@ export interface RadioField extends BaseField {
 
 export interface SelectField extends BaseField {
 	type: "select";
+	mode?: "single" | "multiple"; // Default is "single"
 	options: string[];
 	defaultValue?: string;
 }
