@@ -6,7 +6,6 @@ export interface ComponentConfig<T extends Fields = Fields> {
 	name: string;
 	render: Component;
 	fields?: T;
-	defaultProps?: Partial<{ [K in keyof T]: T[K]["defaultValue"] }>; // TODO should depend on fields
 }
 
 export type RenderFunctions = Map<string, Component>;

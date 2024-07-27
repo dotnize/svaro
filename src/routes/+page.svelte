@@ -14,9 +14,6 @@
 				title: { label: "Title", type: "text" },
 				padding: { label: "Padding", type: "number", step: 1 },
 			},
-			defaultProps: {
-				asd: "asd", // TODO: should error since not in fields
-			},
 		},
 		{ id: "heading", name: "Heading", render: Heading },
 	];
