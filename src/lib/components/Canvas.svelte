@@ -33,8 +33,8 @@
 	{...restProps}
 >
 	{#each canvasData as component (component.id)}
-		<div animate:flip={{ duration: flipDurationMs }}>
-			<div style="pointer-events: none;">
+		<div animate:flip={{ duration: flipDurationMs }} class="draggable">
+			<div class="no-click">
 				<svelte:component
 					this={renderFunctions.get(component.id.split("_copy_")[0])}
 					{...component.props}
@@ -43,3 +43,13 @@
 		</div>
 	{/each}
 </div>
+
+<style>
+	.draggable:hover {
+		background-color: rgba(0, 0, 0, 0.12);
+	}
+
+	.no-click {
+		pointer-events: none;
+	}
+</style>

@@ -19,8 +19,10 @@
 </script>
 
 <Svaro {config}>
-	<div class="grid grid-cols-5">
-		<ComponentList class="col-span-1 flex min-h-svh flex-col gap-2 border-r" />
-		<Canvas class="col-span-4 min-h-svh" />
+	<div class="grid grid-cols-7">
+		<ComponentList
+			class="col-span-1 flex min-h-svh flex-col items-center gap-2 border-r bg-gray-100 p-8"
+		/>
+		<Canvas class="col-span-6 min-h-svh" />
 	</div>
 </Svaro>

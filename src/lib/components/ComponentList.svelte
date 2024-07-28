@@ -50,8 +50,23 @@
 	{...restProps}
 >
 	{#each serializableComponents as component (component.id)}
-		<div class="w-fit border-2 border-black p-1" animate:flip={{ duration: flipDurationMs }}>
+		<div class="draggable" animate:flip={{ duration: flipDurationMs }}>
 			{components.find((c) => c.id === component.id.split("_copy_")[0])?.name}
 		</div>
 	{/each}
 </div>
+
+<style>
+	.draggable {
+		background-color: lightgray;
+		border: solid 1px black;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-width: 128px;
+		width: fit-content;
+		padding: 8px;
+		border-radius: 6px;
+		font-weight: 600;
+	}
+</style>
