@@ -1,16 +1,17 @@
 <script lang="ts">
-	import type { RenderFunctions, SerializableComponent } from "$lib/types/config.js";
+	import { getRenderFunctions } from "$lib/context/config.js";
+	import type { SerializableComponent } from "$lib/types/config.js";
 	import { dndzone, type DndEvent } from "svelte-dnd-action";
 	import { flip } from "svelte/animate";
 	import type { HTMLAttributes } from "svelte/elements";
 
 	const flipDurationMs = 150;
 
-	interface Props extends HTMLAttributes<HTMLDivElement> {
-		renderFunctions: RenderFunctions;
-	}
+	interface Props extends HTMLAttributes<HTMLDivElement> {}
 
-	let { renderFunctions, ...restProps }: Props = $props();
+	let { ...restProps }: Props = $props();
+
+	const renderFunctions = getRenderFunctions();
 
 	let canvasData = $state<SerializableComponent[]>([]);
 

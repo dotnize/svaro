@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { ComponentConfig, SerializableComponent } from "$lib/types/config.js";
+	import { getConfig } from "$lib/context/config.js";
+	import type { SerializableComponent } from "$lib/types/config.js";
 	import {
 		dndzone,
 		SHADOW_ITEM_MARKER_PROPERTY_NAME,
@@ -11,11 +12,11 @@
 
 	const flipDurationMs = 150;
 
-	interface Props extends HTMLAttributes<HTMLDivElement> {
-		components: ComponentConfig[];
-	}
+	interface Props extends HTMLAttributes<HTMLDivElement> {}
 
-	let { components, ...restProps }: Props = $props();
+	let { ...restProps }: Props = $props();
+
+	const components = getConfig();
 
 	let serializableComponents: SerializableComponent[] = $state(
 		components.map(({ id }) => ({

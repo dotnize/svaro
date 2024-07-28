@@ -1,11 +1,10 @@
 <script lang="ts">
-	import Editor from "$lib/components/Editor.svelte";
-	import type { ComponentConfig } from "$lib/types/config.js";
+	import { Canvas, ComponentList, Svaro, type ComponentConfig } from "$lib/index.js";
 
 	import Button from "./example/Button.svelte";
 	import Heading from "./example/Heading.svelte";
 
-	const components: ComponentConfig[] = [
+	const config: ComponentConfig[] = [
 		{
 			id: "button",
 			name: "Button",
@@ -19,4 +18,9 @@
 	];
 </script>
 
-<Editor {components} />
+<Svaro {config}>
+	<div class="grid grid-cols-5">
+		<ComponentList class="col-span-1 flex min-h-svh flex-col gap-2 border-r" />
+		<Canvas class="col-span-4 min-h-svh" />
+	</div>
+</Svaro>
