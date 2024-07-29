@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { setConfig, setRenderFunctions } from "$lib/context/config.js";
+	import { setConfig, setRenderFunctions } from "$lib/context/user-config.js";
 	import type { ComponentConfig } from "$lib/types/config.js";
 	import type { Snippet } from "svelte";
 

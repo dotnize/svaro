@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getConfig } from "$lib/context/config.js";
+	import { getConfig } from "$lib/context/user-config.js";
 	import type { SerializableComponent } from "$lib/types/config.js";
 	import {
 		dndzone,
@@ -10,7 +10,7 @@
 	import { flip } from "svelte/animate";
 	import type { HTMLAttributes } from "svelte/elements";
 
-	const flipDurationMs = 150;
+	const flipDurationMs = 100;
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {}
 
