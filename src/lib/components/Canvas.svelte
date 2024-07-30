@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { createPageState } from "$lib/context/state.svelte.js";
-	import { getRenderFunctions } from "$lib/context/user-config.js";
-	import type { SerializableComponent } from "$lib/types/config.js";
 	import { dndzone, type DndEvent } from "svelte-dnd-action";
 	import { flip } from "svelte/animate";
 	import type { HTMLAttributes } from "svelte/elements";
+
+	import { getPageState } from "$lib/context/state.svelte.js";
+	import { getRenderFunctions } from "$lib/context/user-config.js";
+	import type { SerializableComponent } from "$lib/types/config.js";
 
 	const flipDurationMs = 100;
 
@@ -13,19 +14,20 @@
 	let { ...restProps }: Props = $props();
 
 	const renderFunctions = getRenderFunctions();
-
-	const page = createPageState();
+	const page = getPageState();
 
 	function handlePageConsider(e: CustomEvent<DndEvent<SerializableComponent>>) {
-		page.tree = e.detail.items;
+		if (page.selectedId) page.selectedId = null;
+		page.tree = $state.snapshot(e.detail.items);
 	}
 
 	function handlePageFinalize(e: CustomEvent<DndEvent<SerializableComponent>>) {
-		page.tree = e.detail.items;
+		if (page.selectedId) page.selectedId = null;
+		page.tree = $state.snapshot(e.detail.items);
 	}
 
-	$inspect(page.tree);
-	$inspect(page.selectedId);
+	$inspect({ pageTree: page.tree });
+	$inspect({ pageSelectedId: page.selectedId });
 </script>
 
 <div
@@ -35,6 +37,7 @@
 	{...restProps}
 >
 	{#each page.tree as component, idx (component.id)}
+		{@const Component = renderFunctions.get(component.id.split("_copy_")[0])}
 		<div
 			animate:flip={{ duration: flipDurationMs }}
 			class="draggable {page.selectedId === component.id ? 'selected' : ''}"
@@ -48,10 +51,7 @@
 			role="button"
 		>
 			<div class="no-click">
-				<svelte:component
-					this={renderFunctions.get(component.id.split("_copy_")[0])}
-					{...component.props}
-				/>
+				<Component {...component.props} />
 			</div>
 		</div>
 	{/each}
@@ -65,7 +65,7 @@
 		background-color: rgba(0, 0, 0, 0.12);
 	}
 	.selected {
-		outline: 1px solid blue;
+		outline: 2px solid blue;
 	}
 
 	.no-click {

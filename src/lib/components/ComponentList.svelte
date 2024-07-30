@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { getConfig } from "$lib/context/user-config.js";
-	import type { SerializableComponent } from "$lib/types/config.js";
 	import {
 		dndzone,
 		SHADOW_ITEM_MARKER_PROPERTY_NAME,
@@ -9,6 +7,9 @@
 	} from "svelte-dnd-action";
 	import { flip } from "svelte/animate";
 	import type { HTMLAttributes } from "svelte/elements";
+
+	import { getConfig } from "$lib/context/user-config.js";
+	import type { SerializableComponent } from "$lib/types/config.js";
 
 	const flipDurationMs = 100;
 
@@ -19,9 +20,12 @@
 	const components = getConfig();
 
 	let serializableComponents: SerializableComponent[] = $state(
-		components.map(({ id }) => ({
+		components.map(({ id, fields }) => ({
 			id,
-			props: {},
+			props: fields
+				? // map to default values
+					Object.fromEntries(Object.keys(fields).map((key) => [key, fields[key].defaultValue]))
+				: {},
 		}))
 	);
 
@@ -34,13 +38,15 @@
 
 			e.detail.items = e.detail.items.filter((item) => !item[SHADOW_ITEM_MARKER_PROPERTY_NAME]);
 			e.detail.items.splice(idx, 0, { ...serializableComponents[idx], id: newId });
-			serializableComponents = e.detail.items;
+			serializableComponents = $state.snapshot(e.detail.items);
 		}
 	}
 
 	function handleComponentSourceFinalize(e: CustomEvent<DndEvent<SerializableComponent>>) {
-		serializableComponents = e.detail.items;
+		serializableComponents = $state.snapshot(e.detail.items);
 	}
+
+	$inspect({ componentList: serializableComponents });
 </script>
 
 <div

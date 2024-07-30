@@ -10,6 +10,22 @@ class PageState {
 	setSelectedId(id: string) {
 		this.selectedId = id;
 	}
+
+	getSelectedComponent() {
+		return this.tree.find((c) => c.id === this.selectedId);
+	}
+
+	updateSelectedComponentProp(key: string, value: unknown) {
+		const component = this.getSelectedComponent();
+		if (component) {
+			component.props[key] = value;
+		}
+	}
+
+	getSelectedComponentProp(key: string) {
+		const component = this.getSelectedComponent();
+		return component?.props[key];
+	}
 }
 
 const PAGE_STATE_KEY = Symbol("SVARO_PAGE_STATE");

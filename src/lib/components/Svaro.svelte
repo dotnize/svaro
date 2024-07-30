@@ -1,7 +1,9 @@
 <script lang="ts">
+	import type { Snippet } from "svelte";
+
+	import { createPageState } from "$lib/context/state.svelte.js";
 	import { setConfig, setRenderFunctions } from "$lib/context/user-config.js";
 	import type { ComponentConfig } from "$lib/types/config.js";
-	import type { Snippet } from "svelte";
 
 	interface Props {
 		config: ComponentConfig[];
@@ -13,6 +15,7 @@
 
 	setConfig(config);
 	setRenderFunctions(renderFunctions);
+	createPageState();
 </script>
 
 {@render children()}
