@@ -15,6 +15,14 @@ class PageState {
 		return this.tree.find((c) => c.id === this.selectedId);
 	}
 
+	removeSelectedComponent() {
+		const index = this.tree.findIndex((c) => c.id === this.selectedId);
+		this.selectedId = null;
+		if (index !== -1) {
+			this.tree.splice(index, 1);
+		}
+	}
+
 	updateSelectedComponentProp(key: string, value: unknown) {
 		const component = this.getSelectedComponent();
 		if (component) {
