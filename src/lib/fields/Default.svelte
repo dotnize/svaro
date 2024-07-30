@@ -2,7 +2,7 @@
 	import type { HTMLInputAttributes } from "svelte/elements";
 
 	interface Props extends HTMLInputAttributes {
-		type: "number" | "text";
+		type: "number" | "text" | "color";
 		label: string;
 	}
 
@@ -19,8 +19,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
+		font-size: 0.875rem;
 	}
-	input {
+	/* only if not color type */
+	input:not([type="color"]) {
 		padding: 0.5rem;
 		border: 1px solid #ccc;
 		border-radius: 0.5rem;

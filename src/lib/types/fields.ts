@@ -12,6 +12,11 @@ export interface TextareaField extends BaseField {
 	defaultValue?: string;
 }
 
+export interface ColorField extends BaseField {
+	type: "color";
+	defaultValue?: string;
+}
+
 export interface NumberField extends BaseField {
 	type: "number";
 	min?: number;
@@ -46,6 +51,7 @@ export interface ArrayField extends BaseField {
 export type Field =
 	| TextField
 	| TextareaField
+	| ColorField
 	| NumberField
 	| BooleanField
 	| RadioField

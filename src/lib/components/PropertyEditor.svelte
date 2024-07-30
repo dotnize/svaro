@@ -14,14 +14,14 @@
 	const config = getConfig();
 
 	// get config of selected component
-	const fields = $derived.by(() => {
+	const { fields, name } = $derived.by(() => {
 		const selectedId = page.selectedId;
 		if (!selectedId) return {};
 
 		const component = config.find((c) => c.id === selectedId.split("_copy_")[0]);
 		if (!component) return {};
 
-		return component.fields;
+		return { fields: component.fields, name: component.name };
 	});
 
 	function handleChange(
@@ -37,12 +37,10 @@
 <div {...restProps}>
 	{#if !page.selectedId}
 		No component selected.
-	{:else if !fields}
-		{page.getSelectedComponent()?.id}
 	{:else}
-		{page.getSelectedComponent()?.id}
-		{#each Object.entries(fields) as [key, field]}
-			{#if field.type === "text" || field.type === "number"}
+		<span class="component-name">{name}</span>
+		{#each Object.entries(fields || {}) as [key, field]}
+			{#if field.type === "text" || field.type === "number" || field.type === "color"}
 				<Default
 					type={field.type}
 					label={field.label}
@@ -56,5 +54,23 @@
 				{field.type}
 			{/if}
 		{/each}
+		<button class="remove" type="button" onclick={() => page.removeSelectedComponent()}
+			>Delete</button
+		>
 	{/if}
 </div>
+
+<style>
+	.component-name {
+		font-size: 1.25rem;
+		font-weight: bold;
+	}
+	.remove {
+		border-radius: 0.5rem;
+		padding: 0.5rem 1.5rem;
+		border: 1px solid red;
+		color: red;
+		font-size: 0.875rem;
+		margin-top: 2rem;
+	}
+</style>
