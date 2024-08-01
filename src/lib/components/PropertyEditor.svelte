@@ -44,7 +44,8 @@
 				<Default
 					type={field.type}
 					label={field.label}
-					oninput={(e) => handleChange(key, e)}
+					oninput={field.type === "color" ? undefined : (e) => handleChange(key, e)}
+					onchange={field.type === "color" ? (e) => handleChange(key, e) : undefined}
 					min={field.type === "number" ? field.min : undefined}
 					max={field.type === "number" ? field.max : undefined}
 					step={field.type === "number" ? field.step : undefined}
