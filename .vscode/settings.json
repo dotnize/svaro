@@ -24,11 +24,8 @@
 
 	// more readable tabs
 	"workbench.editor.customLabels.patterns": {
-		"**/routes/**/*.*": "${dirname}/${filename}.${extname}"
+		"**/routes/**/+*.*": "${dirname}/${filename}.${extname}"
 	},
-
-	// smol performance improvements
-	"editor.minimap.renderCharacters": false,
 
 	// set prettier as default formatter for json, ts, js, html, css
 	"[json][jsonc][typescript][javascript][html][css]": {
