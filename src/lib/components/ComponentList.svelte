@@ -34,16 +34,17 @@
 		const { trigger, id } = e.detail.info;
 		if (trigger === TRIGGERS.DRAG_STARTED) {
 			const idx = serializableComponents.findIndex((c) => c.id === id);
+			// TODO: better id generation
 			const newId = `${id.split("_copy_")[0]}_copy_${Math.round(Math.random() * 100000)}`;
 
 			e.detail.items = e.detail.items.filter((item) => !item[SHADOW_ITEM_MARKER_PROPERTY_NAME]);
 			e.detail.items.splice(idx, 0, { ...serializableComponents[idx], id: newId });
-			serializableComponents = $state.snapshot(e.detail.items);
+			serializableComponents = e.detail.items;
 		}
 	}
 
 	function handleComponentSourceFinalize(e: CustomEvent<DndEvent<SerializableComponent>>) {
-		serializableComponents = $state.snapshot(e.detail.items);
+		serializableComponents = e.detail.items;
 	}
 
 	$inspect({ componentList: serializableComponents });
