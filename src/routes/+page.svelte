@@ -4,6 +4,8 @@
 
 	import Button from "./example/Button.svelte";
 	import Heading from "./example/Heading.svelte";
+	import Hero from "./example/Hero.svelte";
+	import Navbar from "./example/Navbar.svelte";
 
 	const config: ComponentConfig[] = [
 		{
@@ -20,6 +22,28 @@
 			name: "Heading",
 			render: Heading,
 			fields: { text: { label: "Text", type: "text" } },
+		},
+		{
+			id: "hero",
+			name: "Hero",
+			render: Hero,
+			fields: {
+				announcement: { label: "Announcement", type: "text", defaultValue: "New" },
+				title: { label: "Title", type: "text", defaultValue: "Hello world" },
+				description: {
+					label: "Description",
+					type: "text",
+					defaultValue: "This is a hero component",
+				},
+				button1: { label: "Button 1", type: "text", defaultValue: "Button 1" },
+				button2: { label: "Button 2", type: "text", defaultValue: "Button 2" },
+				bgColor: { label: "Background color", type: "color", defaultValue: "#f0f0f0" },
+			},
+		},
+		{
+			id: "navbar",
+			name: "Navbar",
+			render: Navbar,
 		},
 	];
 </script>
