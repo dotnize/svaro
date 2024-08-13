@@ -17,13 +17,13 @@
 	const page = getPageState();
 
 	function handlePageConsider(e: CustomEvent<DndEvent<SerializableComponent>>) {
-		if (page.selectedId) page.selectedId = null;
-		page.tree = e.detail.items;
+		if (page.selectedId) page.setSelectedId(null);
+		page.setTree(e.detail.items);
 	}
 
 	function handlePageFinalize(e: CustomEvent<DndEvent<SerializableComponent>>) {
-		if (page.selectedId) page.selectedId = null;
-		page.tree = $state.snapshot(e.detail.items);
+		if (page.selectedId) page.setSelectedId(null);
+		page.setTree(e.detail.items);
 	}
 
 	$inspect({ pageTree: page.tree });
@@ -44,7 +44,7 @@
 			onclick={() => page.setSelectedId(component.id)}
 			onkeydown={(e) => {
 				if (e.key === "Delete") {
-					page.tree = page.tree.filter((c) => c.id !== component.id);
+					page.removeSelectedComponent();
 				}
 			}}
 			tabindex={idx}

@@ -2,22 +2,18 @@ import { getContext, setContext } from "svelte";
 import type { SerializableComponent } from "../types/config.js";
 
 class PageState {
-	tree = $state<SerializableComponent[]>([]);
-	selectedId = $state<string | null>(null);
+	_tree = $state<SerializableComponent[]>([]);
+	_selectedId = $state<string | null>(null);
 
 	constructor() {}
 
-	setSelectedId(id: string) {
-		this.selectedId = id;
-	}
-
 	getSelectedComponent() {
-		return this.tree.find((c) => c.id === this.selectedId);
+		return this._tree.find((c) => c.id === this._selectedId);
 	}
 
 	removeSelectedComponent() {
-		const index = this.tree.findIndex((c) => c.id === this.selectedId);
-		this.selectedId = null;
+		const index = this._tree.findIndex((c) => c.id === this._selectedId);
+		this._selectedId = null;
 		if (index !== -1) {
 			this.tree.splice(index, 1);
 		}
@@ -33,6 +29,22 @@ class PageState {
 	getSelectedComponentProp(key: string) {
 		const component = this.getSelectedComponent();
 		return component?.props[key];
+	}
+
+	get tree() {
+		return this._tree;
+	}
+
+	get selectedId() {
+		return this._selectedId;
+	}
+
+	setTree(newTree: SerializableComponent[]) {
+		this._tree = $state.snapshot(newTree);
+	}
+
+	setSelectedId(id: string | null) {
+		this._selectedId = id;
 	}
 }
 

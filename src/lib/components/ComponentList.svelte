@@ -19,7 +19,7 @@
 
 	const components = getConfig();
 
-	let serializableComponents: SerializableComponent[] = $state(
+	let serializableComponents: SerializableComponent[] = $state.raw(
 		components.map(({ id, fields }) => ({
 			id,
 			props: fields
@@ -46,8 +46,6 @@
 	function handleComponentSourceFinalize(e: CustomEvent<DndEvent<SerializableComponent>>) {
 		serializableComponents = e.detail.items;
 	}
-
-	$inspect({ componentList: serializableComponents });
 </script>
 
 <div
