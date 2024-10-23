@@ -11,12 +11,6 @@
 		"**/.svelte-kit": true,
 		"**/node_modules": true,
 		"pnpm-lock.yaml": true,
-		".editorconfig": true,
-		"eslint.config.js": true,
-		".gitattributes": true,
-		".prettierrc": true,
-		".prettierignore": true,
-		"postcss.config.js": true
 	},
 
 	// use LF line endings

@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Svaro - Visual editor for Svelte 5</title>
+	<title>Svaro Playground</title>
 </svelte:head>
 
 {@render children()}
